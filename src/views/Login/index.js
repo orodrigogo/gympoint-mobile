@@ -2,8 +2,8 @@ import React from 'react';
 
 import { Container, ButtonLoginIn, Logo } from './styles';
 
-import logo from '../../assets/logo.png';
-import Input from '../../components/Input';
+import logo from '~/assets/logo.png';
+import Input from '~/components/Input';
 
 export default function Login() {
   return (
