@@ -3,10 +3,24 @@ import { withNavigationFocus } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import Header from '~/components/Header';
-import { Container } from './styles';
+import CardOrdem from '~/components/CardOrdem';
+
+import { Container, ButtonNew } from './styles';
 
 function Order() {
-  return <Header />;
+  async function handleOrder() {}
+
+  return (
+    <>
+      <Header />
+      <Container>
+        <ButtonNew loading={false} onPress={() => handleOrder()}>
+          Novo pedido de auxílio
+        </ButtonNew>
+        <CardOrdem />
+      </Container>
+    </>
+  );
 }
 
 Order.navigationOptions = {
