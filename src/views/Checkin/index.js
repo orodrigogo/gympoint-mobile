@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Alert } from 'react-native';
 
 import { useSelector } from 'react-redux';
 import { withNavigationFocus } from 'react-navigation';
@@ -16,18 +17,21 @@ function Checkin() {
   const [checkins, setCheckins] = useState([]);
   const student = useSelector(state => state.auth.student);
 
-  useEffect(() => {
-    async function loadCheckins() {
-      const response = await api.get(`students/${student.id}/checkins`);
-      setCheckins(response.data);
-    }
+  async function loadCheckins() {
+    const response = await api.get(`students/${student.id}/checkins`);
+    setCheckins(response.data);
+  }
 
+  useEffect(() => {
     loadCheckins();
   }, []);
 
-  async function handleCheckin() {}
-
-  async function handleDetails() {}
+  async function handleCheckin() {
+    const response = await api
+      .post(`students/${student.id}/checkins`)
+      .then(loadCheckins())
+      .catch(Alert.alert('Você pode fazer somente 3 check-ins por dia!'));
+  }
 
   return (
     <>
@@ -40,9 +44,7 @@ function Checkin() {
         <List
           data={checkins}
           keyExtractor={item => String(item.id)}
-          renderItem={({ item }) => (
-            <CardCheckin onCancel={() => handleDetails(item.id)} data={item} />
-          )}
+          renderItem={({ item }) => <CardCheckin data={item} />}
         />
       </Container>
     </>
