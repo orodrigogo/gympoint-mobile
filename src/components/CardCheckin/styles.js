@@ -22,5 +22,4 @@ export const CheckinId = styled.Text`
 export const CheckinTime = styled.Text`
   font-size: 14px;
   color: #666666;
-
 `;

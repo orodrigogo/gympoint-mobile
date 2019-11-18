@@ -8,9 +8,9 @@ export const Container = styled.View`
 `;
 
 export const ButtonNew = styled(Button)`
-  margin-top: 20px;
+  margin: 20px;
 `;
 
 export const List = styled.FlatList`
-  width: 100%;
+  width: 90%;
 `;

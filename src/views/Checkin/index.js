@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Text } from 'react-native';
+
 import { useSelector } from 'react-redux';
 import { withNavigationFocus } from 'react-navigation';
+
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import api from '~/services/api';
@@ -33,7 +34,7 @@ function Checkin() {
       <Header />
       <Container>
         <ButtonNew loading={false} onPress={() => handleCheckin()}>
-          Entrar no sistema
+          Novo check-in
         </ButtonNew>
 
         <List
