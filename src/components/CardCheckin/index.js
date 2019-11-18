@@ -5,7 +5,6 @@ import pt from 'date-fns/locale/pt';
 import { Container, CheckinId, CheckinTime } from './styles';
 
 export default function CardCheckin({ data }) {
-  // const dataFormatted = formatRelative(parseISO(data.createdAt), pt);
   const dataFormatted = formatRelative(parseISO(data.createdAt), new Date(), {
     locale: pt,
   });

@@ -1,9 +1,16 @@
+import React from 'react';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { createStackNavigator } from 'react-navigation-stack';
+
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import Checkin from './views/Checkin';
 import Order from './views/Order';
 import Login from './views/Login';
+
+import NewOrder from './views/NewOrder';
+import OrdemDetail from './views/OrdemDetail';
 
 export default (signIn = false) =>
   createAppContainer(
@@ -15,7 +22,31 @@ export default (signIn = false) =>
         App: createBottomTabNavigator(
           {
             Checkin,
-            Order,
+            New: {
+              screen: createStackNavigator(
+                {
+                  Order,
+                  NewOrder,
+                  OrdemDetail,
+                },
+                {
+                  defaultNavigationOptions: {
+                    headerTransparent: true,
+                    headerTintColor: '#FFF',
+                    headerLeftContainerStyle: {
+                      marginLeft: 20,
+                    },
+                  },
+                }
+              ),
+              navigationOptions: {
+                tabBarVisible: true,
+                tabBarLabel: 'Pedir Ajuda',
+                tabBarIcon: (
+                  <Icon name="chat-bubble-outline" size={20} color="#ee4e62" />
+                ),
+              },
+            },
           },
           {
             resetOnBlur: true, // toda vez que sai da rota reseta.
@@ -24,14 +55,12 @@ export default (signIn = false) =>
               inactiveTintColor: 'rgba(238, 78, 98, .7)',
               keyboardHidesTabBar: true, // Faz com que o teclado passe por cima do barra de menu.
               style: {
-                backgroundColor: '#ffffff',
+                backgroundColor: '#FFF',
               },
             },
           }
         ),
       },
-      {
-        initialRouteName: signIn ? 'App' : 'Sign',
-      }
+      { initialRouteName: signIn ? 'App' : 'Sign' }
     )
   );

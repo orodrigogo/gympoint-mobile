@@ -1,13 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Alert } from 'react-native';
+import { useSelector } from 'react-redux';
+
 import { withNavigationFocus } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import Header from '~/components/Header';
 import CardOrdem from '~/components/CardOrdem';
 
-import { Container, ButtonNew } from './styles';
+import { Container, ButtonNew, List } from './styles';
 
-function Order() {
+import api from '~/services/api';
+
+function Order({ navigation }) {
+  const student = useSelector(state => state.auth.student);
+  const [orders, setOrders] = useState([]);
+
+  async function loadOrders() {
+    const response = await api.get(`students/${student.id}/help-orders`);
+    setOrders(response.data);
+  }
+
+  useEffect(() => {
+    loadOrders();
+  }, []);
+
   async function handleOrder() {}
 
   return (
@@ -17,17 +34,19 @@ function Order() {
         <ButtonNew loading={false} onPress={() => handleOrder()}>
           Novo pedido de auxílio
         </ButtonNew>
-        <CardOrdem />
+        <List
+          data={orders}
+          keyExtractor={item => String(item.id)}
+          renderItem={({ item }) => (
+            <CardOrdem
+              data={item}
+              onPress={() => navigation.navigate('OrdemDetail', { item })}
+            />
+          )}
+        />
       </Container>
     </>
   );
 }
-
-Order.navigationOptions = {
-  tabBarLabel: 'Pedir ajuda',
-  tabBarIcon: ({ tintColor }) => (
-    <Icon name="chat-bubble-outline" size={20} color={tintColor} />
-  ),
-};
 
 export default withNavigationFocus(Order);
