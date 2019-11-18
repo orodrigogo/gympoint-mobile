@@ -47,7 +47,7 @@ export default function OrdemDetail({ navigation }) {
             <TimeOrdem>{ordem.answer ? updatedAtFormatted : ''}</TimeOrdem>
           </HeaderOrdem>
           <Content>
-            {ordem.answer ? ordem.answer : 'Sem resposta ainda! :('}
+            {ordem.answer ? ordem.answer : 'Sem resposta ainda!'}
           </Content>
         </HelpOrdem>
       </Container>

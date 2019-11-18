@@ -12,7 +12,7 @@ import { Container, ButtonNew, List } from './styles';
 
 import api from '~/services/api';
 
-function Order({ navigation }) {
+function Order({ navigation, isFocused }) {
   const student = useSelector(state => state.auth.student);
   const [orders, setOrders] = useState([]);
 
@@ -22,16 +22,16 @@ function Order({ navigation }) {
   }
 
   useEffect(() => {
-    loadOrders();
-  }, []);
-
-  async function handleOrder() {}
+    if (isFocused) {
+      loadOrders();
+    }
+  }, [isFocused]);
 
   return (
     <>
       <Header />
       <Container>
-        <ButtonNew loading={false} onPress={() => handleOrder()}>
+        <ButtonNew onPress={() => navigation.navigate('NewOrder')}>
           Novo pedido de auxílio
         </ButtonNew>
         <List
