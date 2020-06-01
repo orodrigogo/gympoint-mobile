@@ -1,7 +1,9 @@
-### Documentação do Gympoint
 
-Versão mobile destinada aos alunos da academia. Os instrutores utilizam a versão web.
-
-# Demonstração da Interface
+Versão mobile destinada aos alunos da academia. Com recurso de check-in na academia e tirar dúvidas com instrutor.
 
 ![Alt Text](demogympoint.gif)
+
+
+
+
+
